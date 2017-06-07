@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Each row of the output of this script contains a date and the data 
+# given by top command:
+#
+# date, PID, USER, PR, NI, VIRT, RES, SHR, S, %CPU, %MEM, TIME+, COMMAND    
+#
+
+# Add to this variables the processes you want to monitor
+list_of_processes=("process1" "process2" "process3")
+
+LOG_FILE=resources_monitor.log
+
+while :
+do
+  for process in "${list_of_processes[@]}"
+  do
+    p_pid=$(ps aux | grep "$process\$" | awk '{print $2}')
+    date=$(date +"%y-%m-%d %H:%M:%S.%N")
+    res=$(top -b -p $p_pid -d 1 -n 1 | grep $p_pid)
+    echo "$date $res" >> $LOG_FILE 2>&1
+  done
+  sleep 1
+done
