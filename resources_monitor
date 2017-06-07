@@ -6,7 +6,7 @@
 # date, PID, USER, PR, NI, VIRT, RES, SHR, S, %CPU, %MEM, TIME+, COMMAND    
 #
 
-# Add to this variables the processes you want to monitor
+# Add to this variable the processes you want to monitor
 list_of_processes=("process1" "process2" "process3")
 
 LOG_FILE=resources_monitor.log
